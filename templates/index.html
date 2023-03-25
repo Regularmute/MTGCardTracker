@@ -1,6 +1,12 @@
 <Title>MTG Collection Tracker</Title>
 <h1>MTG Collection Tracker</h1>
 
+{% if session.user_id %}
+<p>You have logged in as {{ session.username }}</p>
+{% else %}
+<p>You are not logged in</p>
+{% endif %}
+
 <p>Welcome!</p>
 
 Testaajien määrä: {{ count }}
