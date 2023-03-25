@@ -20,6 +20,19 @@ def register():
         if users.register(username, password1):
             return redirect("/")
 
-@app.route("/login")
+@app.route("/login", methods=["get", "post"])
 def login():
-    return render_template("login.html")
+    if request.method == "GET":
+        return render_template("login.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if not users.login(username, password):
+            return "error: wrong username or password"
+        return redirect("/")
+
+@app.route("/logout")
+def logout():
+    users.logout()
+    return redirect("/")
