@@ -2,3 +2,10 @@
 <h1>MTG Collection Tracker</h1>
 
 <p>Welcome!</p>
+
+Testaajien määrä: {{ count }}
+<hr>
+{% for tester in testers %}
+{{ tester.name }}
+<hr>
+{% endfor %}
