@@ -9,7 +9,6 @@ def register(name, password):
         db.session.execute(sql, {"name":name, "password":hash_value})
         db.session.commit()
     except:
-        print("exception")
         return False
 
     return True
