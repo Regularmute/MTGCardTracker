@@ -14,3 +14,11 @@ def index():
     result = db.session.execute(text("SELECT name FROM testers"))
     testers = result.fetchall()
     return render_template("index.html", count=len(testers), testers=testers)
+
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
