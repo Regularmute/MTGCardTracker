@@ -1,0 +1,12 @@
+<Title>Collections</Title>
+<h2>Your collections</h2>
+<hr>
+{% for collection in collections %}
+{{ collection.name }}
+<hr>
+{% endfor %}
+
+<form action="/collections" method="post">
+    Title: <input type="text" name="title">
+    <input type="submit" value="Create collection">
+</form>

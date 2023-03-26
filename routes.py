@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect
 from app import app
 import users
+import cardcollections
 
 @app.route("/")
 
@@ -36,3 +37,13 @@ def login():
 def logout():
     users.logout()
     return redirect("/")
+
+@app.route("/collections", methods=["get", "post"])
+def collections():
+    user_id = users.user_id()
+    if request.method == "GET":
+        return render_template("cardcollections.html", collections=cardcollections.get_collections(user_id))
+    if request.method == "POST":
+        title = request.form["title"]
+        cardcollections.create_collection(title)
+        return redirect("/collections")
