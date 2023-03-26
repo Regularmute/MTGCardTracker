@@ -42,7 +42,8 @@ def logout():
 def collections():
     user_id = users.user_id()
     if request.method == "GET":
-        return render_template("cardcollections.html", collections=cardcollections.get_collections(user_id))
+        return render_template("cardcollections.html",
+            collections=cardcollections.get_collections(user_id))
     if request.method == "POST":
         title = request.form["title"]
         cardcollections.create_collection(title)

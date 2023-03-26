@@ -3,12 +3,8 @@ from flask import session
 from db import db
 
 def get_collections(user_id):
-    print("working")
-    try:
-        sql = text("SELECT name FROM collections WHERE owner_id=:owner_id")
-        return db.session.execute(sql, {"owner_id": user_id}).fetchall()
-    except:
-        return False
+    sql = text("SELECT name FROM collections WHERE owner_id=:owner_id")
+    return db.session.execute(sql, {"owner_id": user_id}).fetchall()
 
 def create_collection(name):
     logged_user_id = session.get("user_id", 0)
