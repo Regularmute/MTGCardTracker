@@ -18,3 +18,10 @@ def collection_owner(collection_id):
     result = db.session.execute(sql, {"id": collection_id})
     owner = result.fetchone()[0]
     return owner
+
+def set_collection_id(collection_id):
+    session["collection_id"] = collection_id
+    return True
+
+def get_collection_id():
+    return session.get("collection_id", 0)
