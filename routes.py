@@ -16,7 +16,8 @@ def register():
         password1 = request.form["password1"]
         password2 = request.form["password2"]
         if password1 != password2:
-            return "error: passwords don't match"
+            return render_template("error.html",
+                message="passwords don't match")
         if users.register(username, password1):
             return redirect("/login")
 
@@ -29,7 +30,8 @@ def login():
         password = request.form["password"]
 
         if not users.login(username, password):
-            return "error: wrong username or password"
+            return render_template("error.html",
+                message="wrong username or password")
         return redirect("/")
 
 @app.route("/logout")
@@ -54,4 +56,5 @@ def collectionlist(id):
     owner_id = cardcollections.collection_owner(id)
     if user_id == owner_id:
         return render_template("collectionlist.html")
-    return "error: not your collection"
+    return render_template("error.html",
+        message="error: not your collection")
