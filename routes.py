@@ -47,3 +47,11 @@ def collections():
         title = request.form["title"]
         cardcollections.create_collection(title)
         return redirect("/collections")
+
+@app.route("/collections/<int:id>")
+def collectionlist(id):
+    user_id = users.user_id()
+    owner_id = cardcollections.collection_owner(id)
+    if user_id == owner_id:
+        return render_template("collectionlist.html")
+    return "error: not your collection"
