@@ -12,3 +12,9 @@ def create_collection(name):
     db.session.execute(sql, {"name": name, "owner_id":logged_user_id})
     db.session.commit()
     return True
+
+def collection_owner(collection_id):
+    sql = text("SELECT owner_id FROM collections WHERE id=:id")
+    result = db.session.execute(sql, {"id": collection_id})
+    owner = result.fetchone()[0]
+    return owner
