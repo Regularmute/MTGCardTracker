@@ -18,7 +18,7 @@ def register():
         if password1 != password2:
             return "error: passwords don't match"
         if users.register(username, password1):
-            return redirect("/")
+            return redirect("/login")
 
 @app.route("/login", methods=["get", "post"])
 def login():
