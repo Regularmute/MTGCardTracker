@@ -4,7 +4,7 @@ from flask import session
 from db import db
 
 def login(username, password):
-    sql = text("SELECT password, id FROM users WHERE name=:username")
+    sql = text("SELECT password, id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
     if not user:
@@ -19,11 +19,11 @@ def logout():
     del session["user_id"]
     del session["username"]
 
-def register(name, password):
+def register(username, password):
     hash_value = generate_password_hash(password)
     try:
-        sql = text("INSERT INTO users (name,password) VALUES (:name,:password)")
-        db.session.execute(sql, {"name":name, "password":hash_value})
+        sql = text("INSERT INTO users (username,password) VALUES (:username,:password)")
+        db.session.execute(sql, {"username":username, "password":hash_value})
         db.session.commit()
     except:
         return False
