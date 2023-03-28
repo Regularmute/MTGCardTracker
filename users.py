@@ -27,7 +27,6 @@ def register(name, password):
         db.session.commit()
     except:
         return False
-
     return True
 
 def user_id():
