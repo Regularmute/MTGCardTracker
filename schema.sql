@@ -28,6 +28,5 @@ CREATE TABLE cards (
     collection_id INTEGER REFERENCES collections,
     name TEXT,
     wins INTEGER,
-    losses INTEGER,
-    colors TEXT
+    losses INTEGER
 );
