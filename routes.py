@@ -51,12 +51,12 @@ def collections():
         cardcollections.create_collection(title)
         return redirect("/collections")
 
-@app.route("/collections/<int:id>")
-def collectionlist(id):
+@app.route("/collections/<int:collection_id>")
+def collectionlist(collection_id):
     user_id = users.user_id()
-    owner_id = cardcollections.collection_owner(id)
-    cardcollections.set_collection_id(id)
-    cardlist = cards.get_cards(id)
+    owner_id = cardcollections.collection_owner(collection_id)
+    cardcollections.set_collection_id(collection_id)
+    cardlist = cards.get_cards(collection_id)
     if user_id == owner_id:
         return render_template("collectionlist.html",
             cardlist=cardlist)
