@@ -2,6 +2,7 @@ from flask import render_template, request, redirect
 from app import app
 import users
 import cardcollections
+import cards
 
 @app.route("/")
 def index():
@@ -54,7 +55,20 @@ def collections():
 def collectionlist(id):
     user_id = users.user_id()
     owner_id = cardcollections.collection_owner(id)
+    cardcollections.set_collection_id(id)
+    cardlist = cards.get_cards(id)
     if user_id == owner_id:
-        return render_template("collectionlist.html")
+        return render_template("collectionlist.html",
+            cardlist=cardlist)
     return render_template("error.html",
         message="error: not your collection")
+
+@app.route("/addcard", methods=["get", "post"])
+def addcard():
+    collection_id = cardcollections.get_collection_id()
+    if request.method == "GET":
+        return redirect(f"/collections/{collection_id}")
+    if request.method == "POST":
+        cardname = request.form["cardname"]
+        cards.add_card(cardname, collection_id)
+        return redirect("/collections")

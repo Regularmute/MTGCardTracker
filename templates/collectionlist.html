@@ -1,1 +1,11 @@
 <p>Hello, you own this collection!</p>
+
+{% for card in cardlist %}
+{{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }}
+<hr>
+{% endfor %}
+
+<form action="/addcard" method="post">
+    Card name: <input type="text" name="cardname">
+    <input type="submit" value="Add card">
+</form>
