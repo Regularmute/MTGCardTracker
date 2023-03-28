@@ -71,4 +71,4 @@ def addcard():
     if request.method == "POST":
         cardname = request.form["cardname"]
         cards.add_card(cardname, collection_id)
-        return redirect("/collections")
+        return redirect(f"/collections/{collection_id}")
