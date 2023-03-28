@@ -4,7 +4,6 @@ import users
 import cardcollections
 
 @app.route("/")
-
 def index():
     return render_template("index.html")
 
