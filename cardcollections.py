@@ -3,7 +3,7 @@ from flask import session
 from db import db
 
 def get_collections(user_id):
-    sql = text("SELECT name FROM collections WHERE owner_id=:owner_id")
+    sql = text("SELECT name, id FROM collections WHERE owner_id=:owner_id")
     return db.session.execute(sql, {"owner_id": user_id}).fetchall()
 
 def create_collection(name):
