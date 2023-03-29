@@ -76,7 +76,7 @@ def addcard():
         return redirect(f"/collections/{collection_id}")
     if request.method == "POST":
         cardname = request.form["cardname"]
-        if cardname > 150:
+        if len(cardname) > 150:
             return render_template("error.html",
                     message="card name too long: max 150 characters")
         cards.add_card(cardname, collection_id)
