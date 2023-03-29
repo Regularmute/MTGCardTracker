@@ -72,3 +72,10 @@ def addcard():
         cardname = request.form["cardname"]
         cards.add_card(cardname, collection_id)
         return redirect(f"/collections/{collection_id}")
+
+@app.route("/deletecard", methods=["post"])
+def deletecard():
+    collection_id = cardcollections.get_collection_id()
+    card_id = request.form["card_id"]
+    cards.delete_card(card_id)
+    return redirect(f"/collections/{collection_id}")

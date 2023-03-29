@@ -11,3 +11,9 @@ def add_card(name, collection_id):
     db.session.execute(sql, {"name": name, "collection_id":collection_id,})
     db.session.commit()
     return True
+
+def delete_card(card_id):
+    sql = text("DELETE FROM cards WHERE id=:card_id")
+    db.session.execute(sql, {"card_id": card_id})
+    db.session.commit()
+    return True
