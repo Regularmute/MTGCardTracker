@@ -61,6 +61,9 @@ def collections():
             collections=cardcollections.get_collections(user_id))
     if request.method == "POST":
         title = request.form["title"]
+        if len(title) < 1:
+            return render_template("error.html",
+                message="collection name missing")
         if len(title) > 60:
             return render_template("error.html",
                 message="collection title too long: max 60 characters")
@@ -86,6 +89,9 @@ def addcard():
         return redirect(f"/collections/{collection_id}")
     if request.method == "POST":
         cardname = request.form["cardname"]
+        if len(cardname) < 1:
+            return render_template("error-html",
+                message="card name missing")
         if len(cardname) > 150:
             return render_template("error.html",
                     message="card name too long: max 150 characters")
