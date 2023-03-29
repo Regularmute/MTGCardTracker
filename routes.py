@@ -16,6 +16,9 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
+        if len(username) > 60:
+            return render_template("error.html",
+                message="username is too long: max 60 characters")
         if password1 != password2:
             return render_template("error.html",
                 message="passwords don't match")
@@ -48,6 +51,9 @@ def collections():
             collections=cardcollections.get_collections(user_id))
     if request.method == "POST":
         title = request.form["title"]
+        if len(title) > 60:
+            return render_template("error.html",
+                message="collection title too long: max 60 characters")
         cardcollections.create_collection(title)
         return redirect("/collections")
 
@@ -70,6 +76,9 @@ def addcard():
         return redirect(f"/collections/{collection_id}")
     if request.method == "POST":
         cardname = request.form["cardname"]
+        if cardname > 150:
+            return render_template("error.html",
+                    message="card name too long: max 150 characters")
         cards.add_card(cardname, collection_id)
         return redirect(f"/collections/{collection_id}")
 
