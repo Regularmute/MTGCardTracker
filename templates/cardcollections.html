@@ -1,5 +1,6 @@
 <Title>Collections</Title>
 <h2>Your collections</h2>
+<br> <a href="/">Front page</a>
 <hr>
 {% for collection in collections %}
 <a href="{{ url_for('collectionlist', collection_id=collection.id) }}">{{ collection.name }}</a>
