@@ -4,6 +4,12 @@
     <a href="/">Front page</a>
 </p>
 
+<form action="/addcard" method="post">
+    Card name: <input type="text" name="cardname">
+    <input type="submit" value="Add card">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
 {% for card in cardlist %}
 {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }}
 <form action="/deletecard" method="post">
@@ -12,9 +18,3 @@
 </form>
 <hr>
 {% endfor %}
-
-<form action="/addcard" method="post">
-    Card name: <input type="text" name="cardname">
-    <input type="submit" value="Add card">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
