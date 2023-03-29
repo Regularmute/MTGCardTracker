@@ -1,8 +1,8 @@
+import secrets
 from sqlalchemy.sql import text
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import abort, request, session
 from db import db
-import secrets
 
 def login(username, password):
     sql = text("SELECT password, id FROM users WHERE username=:username")
