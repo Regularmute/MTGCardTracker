@@ -61,7 +61,7 @@ def collectionlist(collection_id):
         return render_template("collectionlist.html",
             cardlist=cardlist)
     return render_template("error.html",
-        message="error: not your collection")
+        message="not your collection")
 
 @app.route("/addcard", methods=["get", "post"])
 def addcard():
