@@ -90,7 +90,7 @@ def addcard():
     if request.method == "POST":
         cardname = request.form["cardname"]
         if len(cardname) < 1:
-            return render_template("error-html",
+            return render_template("error.html",
                 message="card name missing")
         if len(cardname) > 150:
             return render_template("error.html",
