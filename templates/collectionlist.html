@@ -6,7 +6,7 @@
 
 <form action="/addcard" method="post">
     Card name: <input type="text" name="cardname">
-    <input type="submit" value="Add card">
+    <input type="submit" value="Add card" minlength="1" maxlength="150">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 

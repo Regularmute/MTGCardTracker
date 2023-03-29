@@ -2,11 +2,11 @@
 <h2>Create an account</h2>
 
 <form action="/register" method="post">
-Username: <input type="text" name="username">
+Username: <input type="text" name="username" minlength="6" maxlength="60">
 <p>
-Password: <input type="password" name="password1">
+Password: <input type="password" name="password1" minlength="6" maxlength="60">
 <p>
-Confirm password: <input type="password" name="password2">
+Confirm password: <input type="password" name="password2" minlength="6" maxlength="60">
 <p>
 <input type="submit" value="Create account">
 </form>

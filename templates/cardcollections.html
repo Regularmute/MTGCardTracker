@@ -9,6 +9,6 @@
 
 <form action="/collections" method="post">
     Title: <input type="text" name="title">
-    <input type="submit" value="Create collection">
+    <input type="submit" value="Create collection" minlength="1" maxlength="60">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
