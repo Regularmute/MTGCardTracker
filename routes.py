@@ -17,7 +17,7 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
-        if re.match(r"^[A-Za-z0-9]+$", username):
+        if not re.match(r"^[A-Za-z0-9]+$", username):
             return render_template("error.html",
                 message="username must only have English letters or numbers")
         if len(username) < 6:
