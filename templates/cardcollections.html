@@ -4,6 +4,10 @@
 <hr>
 {% for collection in collections %}
 <a href="{{ url_for('collectionlist', collection_id=collection.id) }}">{{ collection.name }}</a>
+<form action="/deletecollection" method="post">
+    <button name="deletecollection">delete collection</button>
+    <input type="hidden" name="collection_id" value="{{ collection.id }}">
+</form>
 <hr>
 {% endfor %}
 

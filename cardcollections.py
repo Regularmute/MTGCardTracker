@@ -13,6 +13,12 @@ def create_collection(name):
     db.session.commit()
     return True
 
+def delete_collection(collection_id):
+    sql = text("DELETE FROM collections WHERE id=:collection_id")
+    db.session.execute(sql, {"collection_id": collection_id})
+    db.session.commit()
+    return True
+
 def collection_owner(collection_id):
     sql = text("SELECT owner_id FROM collections WHERE id=:id")
     result = db.session.execute(sql, {"id": collection_id})

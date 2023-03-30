@@ -70,6 +70,12 @@ def collections():
         cardcollections.create_collection(title)
         return redirect("/collections")
 
+@app.route("/deletecollection", methods=["post"])
+def deletecollection():
+    collection_id = cardcollections.get_collection_id()
+    cardcollections.delete_collection(collection_id)
+    return redirect(f"/collections")
+
 @app.route("/collections/<int:collection_id>")
 def collectionlist(collection_id):
     user_id = users.user_id()
