@@ -17,3 +17,27 @@ def delete_card(card_id):
     db.session.execute(sql, {"card_id": card_id})
     db.session.commit()
     return True
+
+def increase_wins(card_id):
+    sql = text("UPDATE cards SET wins=wins+1 WHERE id=:card_id")
+    db.session.execute(sql, {"card_id": card_id})
+    db.session.commit()
+    return True
+
+def remove_wins(card_id):
+    sql = text("UPDATE cards SET wins=wins-1 WHERE id=:card_id")
+    db.session.execute(sql, {"card_id": card_id})
+    db.session.commit()
+    return True
+
+def increase_losses(card_id):
+    sql = text("UPDATE cards SET losses=losses+1 WHERE id=:card_id")
+    db.session.execute(sql, {"card_id": card_id})
+    db.session.commit()
+    return True
+
+def remove_losses(card_id):
+    sql = text("UPDATE cards SET losses=losses-1 WHERE id=:card_id")
+    db.session.execute(sql, {"card_id": card_id})
+    db.session.commit()
+    return True

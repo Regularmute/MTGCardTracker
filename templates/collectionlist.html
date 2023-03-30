@@ -16,5 +16,25 @@
     <button name="deletecard">delete card</button>
     <input type="hidden" name="card_id" value="{{ card.id }}">
 </form>
+<form action="/updatewins" method="post">
+    <button name="addwins">add win</button>
+    <input type="hidden" name="card_id" value="{{ card.id }}">
+    <input type="hidden" name="direction" value="add">
+</form>
+<form action="/updatewins" method="post">
+    <button name="removewins">remove win</button>
+    <input type="hidden" name="card_id" value="{{ card.id }}">
+    <input type="hidden" name="direction" value="remove">
+</form>
+<form action="/updatelosses" method="post">
+    <button name="addloss">add loss</button>
+    <input type="hidden" name="card_id" value="{{ card.id }}">
+    <input type="hidden" name="direction" value="add">
+</form>
+<form action="/updatelosses" method="post">
+    <button name="removeloss">remove loss</button>
+    <input type="hidden" name="card_id" value="{{ card.id }}">
+    <input type="hidden" name="direction" value="remove">
+</form>
 <hr>
 {% endfor %}

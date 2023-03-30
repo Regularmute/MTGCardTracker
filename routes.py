@@ -104,3 +104,25 @@ def deletecard():
     card_id = request.form["card_id"]
     cards.delete_card(card_id)
     return redirect(f"/collections/{collection_id}")
+
+@app.route("/updatewins", methods=["post"])
+def updatewins():
+    collection_id = cardcollections.get_collection_id()
+    card_id = request.form["card_id"]
+    direction = request.form["direction"]
+    if direction == "add":
+        cards.increase_wins(card_id)
+    if direction == "remove":
+        cards.remove_wins(card_id)
+    return redirect(f"/collections/{collection_id}")
+
+@app.route("/updatelosses", methods=["post"])
+def updatelosses():
+    collection_id = cardcollections.get_collection_id()
+    card_id = request.form["card_id"]
+    direction = request.form["direction"]
+    if direction == "add":
+        cards.increase_losses(card_id)
+    if direction == "remove":
+        cards.remove_losses(card_id)
+    return redirect(f"/collections/{collection_id}")
