@@ -20,9 +20,9 @@ def register():
         if not re.match(r"^[A-Za-z0-9]+$", username):
             return render_template("error.html",
                 message="username must only have English letters or numbers")
-        if len(username) < 6:
+        if len(username) < 1:
             return render_template("error.html",
-                message="username must have at least 6 characters")
+                message="username must not be empty")
         if len(username) > 60:
             return render_template("error.html",
                 message="username is too long: max 60 characters")
