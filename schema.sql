@@ -6,7 +6,7 @@ CREATE TABLE users (
 
 CREATE TABLE collections (
     id SERIAL PRIMARY KEY,
-    owner_id INTEGER REFERENCES users,
+    owner_id INTEGER REFERENCES users ON DELETE CASCADE,
     name TEXT NOT NULL
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE decks (
 
 CREATE TABLE cards (
     id SERIAL PRIMARY KEY,
-    collection_id INTEGER REFERENCES collections,
+    collection_id INTEGER REFERENCES collections ON DELETE CASCADE,
     name TEXT NOT NULL,
     wins INTEGER,
     losses INTEGER
