@@ -88,21 +88,18 @@ def collectionlist(collection_id):
     return render_template("error.html",
         message="not your collection")
 
-@app.route("/addcard", methods=["get", "post"])
+@app.route("/addcard", methods=["post"])
 def addcard():
     collection_id = cardcollections.get_collection_id()
-    if request.method == "GET":
-        return redirect(f"/collections/{collection_id}")
-    if request.method == "POST":
-        cardname = request.form["cardname"]
-        if len(cardname) < 1:
-            return render_template("error.html",
-                message="card name missing")
-        if len(cardname) > 150:
-            return render_template("error.html",
-                    message="card name too long: max 150 characters")
-        cards.add_card(cardname, collection_id)
-        return redirect(f"/collections/{collection_id}")
+    cardname = request.form["cardname"]
+    if len(cardname) < 1:
+        return render_template("error.html",
+            message="card name missing")
+    if len(cardname) > 150:
+        return render_template("error.html",
+                message="card name too long: max 150 characters")
+    cards.add_card(cardname, collection_id)
+    return redirect(f"/collections/{collection_id}")
 
 @app.route("/deletecard", methods=["post"])
 def deletecard():
