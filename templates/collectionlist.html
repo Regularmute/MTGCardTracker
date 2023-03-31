@@ -10,7 +10,7 @@
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% for card in cardlist %}
-{% set winrate = card.wins / (card.wins + card.losses) * 100 %}
+{% set winrate = (card.wins / (card.wins + card.losses) * 100) if not card.wins + card.losses == 0 else 0 %}
 {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ '%0.2f' % winrate|float }}%
 <form action="/deletecard" method="post">
     <button name="deletecard">delete card</button>
