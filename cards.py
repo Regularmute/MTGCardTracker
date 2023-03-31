@@ -2,7 +2,8 @@ from sqlalchemy import text
 from db import db
 
 def get_cards(collection_id):
-    sql = text("SELECT name, wins, losses, id FROM cards WHERE collection_id=:collection_id ORDER BY id DESC")
+    sql = text("""SELECT name, wins, losses, id FROM cards
+                WHERE collection_id=:collection_id ORDER BY id DESC""")
     return db.session.execute(sql, {"collection_id": collection_id}).fetchall()
 
 def add_card(name, collection_id):

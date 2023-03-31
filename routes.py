@@ -72,9 +72,9 @@ def collections():
 
 @app.route("/deletecollection", methods=["post"])
 def deletecollection():
-    collection_id = cardcollections.get_collection_id()
+    collection_id = request.form["collection_id"]
     cardcollections.delete_collection(collection_id)
-    return redirect(f"/collections")
+    return redirect("/collections")
 
 @app.route("/collections/<int:collection_id>")
 def collectionlist(collection_id):
