@@ -1,45 +1,80 @@
 # MTG Card Tracker
 
-The application helps manage MTG cards and organize them into collections (e.g. "cubes") and decks. Users can update the amount of times a card has won or lost to help the owner of the cube to see how the cards and colors are performing. Cards in a collection also have a name and a color.
+<h2>Link to the application: <a href="https://card-tracker.fly.dev/"> Card Tracker </a> </h2>
 
-The application has following features:
+The application helps manage trading cards and organize them into collections (e.g. "cubes") and decks. Users can update the amount of times a card has won or lost to help the owner of the cube to see how the cards are performing.
 
-Features for any user:
-* A user can log in, log out and create an account.
-* A user can browse collections, including decks and cards within the collections.
-  * The user can search, filter and sort the displays by Name, Color or Win rate.
-* A user can create a new empty collection of cards.
+<h2>Current features</h2>
+The application currently has the following features:
 
-Features for the creator of a collection, referred to as its 'owner':
-  * The owner can add cards to the collection. Each card is assigned a name, a color (including 'colorless'), victories and losses. (NOTE: Worth considering if more properties should be included from the start, in case adding new fields to the database may turn out difficult later.)
-  * The owner can adjust the properties of cards in their collection.
-  * The owner can remove cards from their collection.
-  * The owner can delete the collection.
-  * The owner can invite other users to use the collection.
+  * The user can log in, log out and create an account.
+  * The user can create a new empty collection of cards.
+  * The user can delete their collections.
+  * The user can add cards to their collection.
+    * Each card has a name, amount of wins, losses and a win rate percentage.
+    * Wins and losses can be incremented and decremented.
+  * The user can delete cards from their collection.
+  * A user can browse their collections and cards within the collections.
 
-Features for users invited to use a collection (Including the owner):
-* An invited user can create a deck from the cards in the collection.
-* An invited user can update the amount of times cards in their deck have won or lost.
-  * Possible implementation is to let the user select multiple cards in their deck with checkboxes and simultaenously increment their Victories or Losses by one. This will prevent cards that weren't drawn in a game from having their win rate affected.
+<h2>Test ideas</h2>
+Some bugs may occur when testing, they are usually solved either by refreshing the page or by returning to an earlier page and trying the operation again. These will be fixed in the future.
 
-I am planning to keep track of following databases with various values:
-* Users
-  * Username
-  * Password hash
-* Collections
-  * Creator (Refers to Users.id)
-  * Invited users (Refers to Users.id)
-* Decks 
-  * Collection (Refers to Collection.id)
-  * Creator (Refers to Users.id)
-* Cards
-  * Collection (Refers to Collection.id, IMPORTANT to distinguish different instances of the same card in different collections. This makes it possible for the same card to have different amount of victories and losses in different collections.)
-  * Name
-  * Color(s)
-  * Victories
-  * Losses
-  * Win rate, calculated with [Victories / (Victories+Losses)]
-* Colors
-  * Collection (Refers to Collection.id for similar reasons as in the Cards table. Enables displaying the performance of a color in each collection.)
-  * Name (White, Blue, Black, Red, Green or Colorless)
-  * Win rate, calculated with [Total Victories of all Cards in the same Collection with the listed Color divided by the sum of those cards' Victories and Losses]
+Some ways to test the current features:
+
+<h3>Registration</h3>
+
+  * The front page has a link to the registration page.
+    * Registering an account requires an username consisting of 1-60 english letters or numbers and a password of at least 6 characters
+    * After registering an account, the page should redirect back to the front page with the login form
+
+<h3>Logging in and out</h3>
+
+  * The front page should display the logged user's username, or the registration link for an unlogged user.
+  * The login form should work correctly and redirect the user to the front page after a successful operation.
+  * A logged user should be able to log out by clicking the link on the front page.
+    * After a successful logout operation the user should be redirected to the front page.
+
+<h3>Errors</h3>
+
+  * Error page should have a link to the front page and display an explanation of what caused the error.
+
+<h3>Collections</h3>
+
+  * The collection page should be accessible from the front page if and only if the user is logged in.
+  * Writing a name to the collection form and submitting should correctly create a new collection.
+    * The collection must have a name
+  * The collection page should display all of the user's collections.
+    * The collections should display a button to delete them, and deletion should remove the collection and the cards inside without affecting the other collections or their contents.
+  * The user can click a collection's name to access their unique page
+
+<h3>Cards</h3>
+
+  * A collection's page should display the form to add a card and a list of cards added to it.
+    * For a new collection, no cards should be visible.
+  * A card is added by typing its name into the form and submitting it.
+    * Trying to submit an empty form should return an error page.
+  * Each card should display their name, wins, losses and a win-rate percentage (rounded to two decimal places). The win-rate is 0% when the cards have no wins or losses marked.
+    * Currently there is a bug where wins and losses can go down into the negatives.
+  * Each card should display the following buttons (no button should affect the other cards in the collection):
+    * delete card: should remove the card from the collection.
+    * add win: should increment the card's wins and update its win rate.
+    * add loss: should increment the card's losses and update its win rate.
+    * remove win: should decrement the card's wins and update its win rate.
+    * remove loss: should decrement the card's losses and update its win rate.
+
+
+<h2>Planned features</h2>
+Possible ideas to expand the application:
+
+  * The creator of a collection can add other users as "players" to view the collection.
+  * The user can view any collections they've been invited to as players.
+  * The user can search for a card in a collection or deck by name or other property.
+  * The user can create a deck from the cards in a collection they have access to
+  * The user can sort cards by name, wins, losses, winrate and time added.
+  * The user can add multiple cards at once.
+  * The user can update multiple cards' wins or losses at once.
+  * The user can edit cards' names.
+  * More properties for the cards, such as mana cost, color or other attributes.
+  * Admin role functionality with more rights than a regular user (ability to see all users).
+
+<h2>Thank you very much for taking the time to inspect my application!</h2>
