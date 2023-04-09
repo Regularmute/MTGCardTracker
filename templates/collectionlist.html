@@ -12,7 +12,9 @@
 {% for card in cardlist %}
 {% set winrate = (card.wins / (card.wins + card.losses) * 100) if not card.wins + card.losses == 0 else 0 %}
 {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ '%0.2f' % winrate|float }}%
-<form action="/deletecard" method="post">
+<form action="/deletecard" method="post"
+    onsubmit="return confirm(
+        'Are you sure you want to delete this card? Its statistics can\'t be recovered');">
     <button name="deletecard">delete card</button>
     <input type="hidden" name="card_id" value="{{ card.id }}">
 </form>
