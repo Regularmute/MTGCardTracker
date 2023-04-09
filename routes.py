@@ -60,7 +60,7 @@ def collections():
         return render_template("cardcollections.html",
             collections=cardcollections.get_collections_by_user(user_id))
     if request.method == "POST":
-        title = request.form["title"]
+        title = request.form["title"].strip()
         if len(title) < 1:
             return render_template("error.html",
                 message="collection name missing")
