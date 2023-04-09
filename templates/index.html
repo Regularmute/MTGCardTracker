@@ -1,11 +1,14 @@
-<Title>MTG Collection Tracker</Title>
-<h1>MTG Collection Tracker</h1>
+<Title>CardApp - Front Page</Title>
 
 {% if session.user_id %}
-<p>You have logged in as {{ session.username }}</p>
-<a href="/collections">Your collections</a>
+<a href="/">Front Page</a>
+<a href="/collections">Your Collections</a>
 <a href="/logout">Logout</a>
+<h1>Card Collection Tracker</h1>
+
+<p>You have logged in as {{ session.username }}</p>
 {% else %}
+<h1>Card Collection Tracker</h1>
 <p>You are not logged in. Log in <a href="/login">here</a>.</p>
 {% endif %}
 
