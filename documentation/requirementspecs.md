@@ -5,16 +5,16 @@ The application helps manage MTG cards and organize them into collections (e.g. 
 The application has following features:
 
 Features for any user:
-* A user can log in, log out and create an account.
+* A user can log in, log out and create an account. (Done)
 * A user can browse collections, including decks and cards within the collections.
   * The user can search, filter and sort the displays by Name, Color or Win rate.
-* A user can create a new empty collection of cards.
+* A user can create a new empty collection of cards. (Done)
 
 Features for the creator of a collection, referred to as its 'owner':
-  * The owner can add cards to the collection. Each card is assigned a name, a color (including 'colorless'), victories and losses. (NOTE: Worth considering if more properties should be included from the start, in case adding new fields to the database may turn out difficult later.)
+  * The owner can add cards to the collection. Each card is assigned a name, a color (including 'colorless'), victories and losses. (NOTE: Worth considering if more properties should be included from the start, in case adding new fields to the database may turn out difficult later.) (Partially Done)
   * The owner can adjust the properties of cards in their collection.
-  * The owner can remove cards from their collection.
-  * The owner can delete the collection.
+  * The owner can remove cards from their collection. (Done)
+  * The owner can delete the collection. (Done)
   * The owner can invite other users to use the collection.
 
 Features for users invited to use a collection (Including the owner):
