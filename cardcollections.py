@@ -6,6 +6,10 @@ def get_collections_by_user(user_id):
     sql = text("SELECT name, id FROM collections WHERE owner_id=:owner_id")
     return db.session.execute(sql, {"owner_id": user_id}).fetchall()
 
+def get_collection_by_id(collection_id):
+    sql = text("SELECT name, id FROM collections WHERE id=:collection_id")
+    return db.session.execute(sql, {"collection_id": collection_id}).fetchone()
+
 def create_collection(name):
     logged_user_id = session.get("user_id", 0)
     sql = text("INSERT INTO collections (name, owner_id) VALUES (:name,:owner_id)")
