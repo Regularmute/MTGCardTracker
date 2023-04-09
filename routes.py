@@ -87,7 +87,9 @@ def collectionlist(collection_id):
     cardcollections.set_collection_id(collection_id)
     cardlist = cards.get_cards(collection_id)
     collection = cardcollections.get_collection_by_id(collection_id)
-    if user_id == owner_id:
+
+    is_invited = collectioninvites.find_guest_in_collection_id(user_id, collection_id)
+    if user_id == owner_id or is_invited:
         return render_template("collectionlist.html",
             cardlist=cardlist, collection=collection)
     return render_template("error.html",
