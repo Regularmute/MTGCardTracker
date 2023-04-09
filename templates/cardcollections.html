@@ -6,8 +6,9 @@
 <hr>
 {% for collection in collections %}
 <a href="{{ url_for('collectionlist', collection_id=collection.id) }}">{{ collection.name }}</a>
-<form action="/deletecollection" method="post">
-    <button name="deletecollection">delete collection</button>
+<form action="/deletecollection" method="post"
+    onsubmit="return confirm('Are you sure you want to delete this collection?');">
+    <button name="deletecollection" >delete collection</button>
     <input type="hidden" name="collection_id" value="{{ collection.id }}">
 </form>
 <hr>
