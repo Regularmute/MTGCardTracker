@@ -14,8 +14,3 @@ def find_guest_in_collection_id(guest_id, collection_id):
                 WHERE guest_id=:guest_id AND collection_id=:collection_id""")
     return db.session.execute(
         sql, {"guest_id": guest_id, "collection_id": collection_id}).fetchall()
-
-def find_collections_by_guest(guest_id):
-    sql = text("""SELECT collection_id FROM collection_invitations
-                WHERE guest_id=:guest_id""")
-    return db.session.execute(sql, {"guest_id": guest_id})
