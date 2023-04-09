@@ -3,6 +3,7 @@ from flask import render_template, request, redirect
 from app import app
 import users
 import cardcollections
+import collectioninvites
 import cards
 
 @app.route("/")
@@ -91,6 +92,14 @@ def collectionlist(collection_id):
             cardlist=cardlist, collection=collection)
     return render_template("error.html",
         message="not your collection")
+
+@app.route("/inviteuser", methods=["post"])
+def inviteuser():
+    collection_id = cardcollections.get_collection_id()
+    username = request.form["usernametoinvite"]
+    invited_user = users.find_one_by_username(username)[1]
+    collectioninvites.invite_user_to_collection(collection_id, invited_user)
+    return redirect(f"collections/{collection_id}")
 
 @app.route("/addcard", methods=["post"])
 def addcard():
