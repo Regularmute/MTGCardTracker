@@ -85,9 +85,10 @@ def collectionlist(collection_id):
     owner_id = cardcollections.collection_owner(collection_id)
     cardcollections.set_collection_id(collection_id)
     cardlist = cards.get_cards(collection_id)
+    collection = cardcollections.get_collection_by_id(collection_id)
     if user_id == owner_id:
         return render_template("collectionlist.html",
-            cardlist=cardlist)
+            cardlist=cardlist, collection=collection)
     return render_template("error.html",
         message="not your collection")
 
