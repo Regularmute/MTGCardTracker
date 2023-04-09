@@ -58,7 +58,7 @@ def collections():
     user_id = users.user_id()
     if request.method == "GET":
         return render_template("cardcollections.html",
-            collections=cardcollections.get_collections(user_id))
+            collections=cardcollections.get_collections_by_user(user_id))
     if request.method == "POST":
         title = request.form["title"]
         if len(title) < 1:

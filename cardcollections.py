@@ -2,7 +2,7 @@ from sqlalchemy import text
 from flask import session
 from db import db
 
-def get_collections(user_id):
+def get_collections_by_user(user_id):
     sql = text("SELECT name, id FROM collections WHERE owner_id=:owner_id")
     return db.session.execute(sql, {"owner_id": user_id}).fetchall()
 
