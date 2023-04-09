@@ -1,4 +1,6 @@
-<Title>Collections</Title>
+{% extends "layout.html" %}
+{% block title %}Collections{% endblock %}
+{% block content %}
 <h2>Your collections</h2>
 <br> <a href="/">Front page</a>
 <hr>
@@ -16,3 +18,4 @@
     <input type="submit" value="Create collection" minlength="1" maxlength="60">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% endblock %}
