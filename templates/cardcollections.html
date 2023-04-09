@@ -19,4 +19,10 @@
     <input type="submit" value="Create collection" minlength="1" maxlength="60">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+<hr>
+<h2>Collections invited to</h2>
+{% for collection in authorized_collections %}
+<a href="{{ url_for('collectionlist', collection_id=collection.id) }}">{{ collection.name }}</a>
+<hr>
+{% endfor %}
 {% endblock %}

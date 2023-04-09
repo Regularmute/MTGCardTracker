@@ -62,7 +62,8 @@ def collections():
     user_id = users.user_id()
     if request.method == "GET":
         return render_template("cardcollections.html",
-            collections=cardcollections.get_collections_by_user(user_id))
+            collections=cardcollections.get_collections_by_user(user_id),
+            authorized_collections=cardcollections.get_collections_that_invited_guest(user_id))
     if request.method == "POST":
         title = request.form["title"].strip()
         if len(title) < 1:

@@ -6,6 +6,13 @@ def get_collections_by_user(user_id):
     sql = text("SELECT name, id FROM collections WHERE owner_id=:owner_id")
     return db.session.execute(sql, {"owner_id": user_id}).fetchall()
 
+def get_collections_that_invited_guest(guest_id):
+    sql = text("""SELECT name, collections.id FROM collections INNER JOIN collection_invitations
+                ON collections.id=collection_invitations.collection_id
+                WHERE collection_invitations.guest_id=:guest_id""")
+    return db.session.execute(sql, {"guest_id": guest_id}).fetchall()
+
+
 def get_collection_by_id(collection_id):
     sql = text("SELECT name, id FROM collections WHERE id=:collection_id")
     return db.session.execute(sql, {"collection_id": collection_id}).fetchone()
