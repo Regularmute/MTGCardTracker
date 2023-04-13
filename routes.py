@@ -18,26 +18,22 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
+        error_message = "something went wrong"
         if users.find_one_by_username(username):
-            return render_template("error.html",
-                message="username is taken")
+            error_message="username is taken"
         if not re.match(r"^[A-Za-z0-9]+$", username):
-            return render_template("error.html",
-                message="username must only have English letters or numbers")
+            error_message="username must only have English letters or numbers"
         if len(username) < 1:
-            return render_template("error.html",
-                message="username must not be empty")
+            error_message="username must not be empty"
         if len(username) > 60:
-            return render_template("error.html",
-                message="username is too long: max 60 characters")
+            error_message="username is too long: max 60 characters"
         if len(password1) < 6:
-            return render_template("error.html",
-                message="password must have at least 6 characters")
+            error_message="password must have at least 6 characters"
         if password1 != password2:
-            return render_template("error.html",
-                message="passwords don't match")
-        if users.register(username, password1):
+            error_message="passwords don't match"
+        elif users.register(username, password1):
             return redirect("/login")
+        return render_template("error.html", message=error_message)
 
 @app.route("/login", methods=["get", "post"])
 def login():
