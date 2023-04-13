@@ -12,9 +12,11 @@ def get_collections_that_invited_guest(guest_id):
                 WHERE collection_invitations.guest_id=:guest_id""")
     return db.session.execute(sql, {"guest_id": guest_id}).fetchall()
 
-
+# Find a collection and its owner's username from table "collections" and "users"
 def get_collection_by_id(collection_id):
-    sql = text("SELECT name, id FROM collections WHERE id=:collection_id")
+    sql = text("""SELECT collections.name, collections.id, owner_id, users.username
+                FROM collections INNER JOIN users ON collections.owner_id=users.id
+                WHERE collections.id=:collection_id""")
     return db.session.execute(sql, {"collection_id": collection_id}).fetchone()
 
 def create_collection(name):
