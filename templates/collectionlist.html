@@ -13,11 +13,13 @@
     <input type="submit" value="Add card" minlength="1" maxlength="150">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% if logged_userid == collection.owner_id %}
 <form action="/inviteuser" method="post">
     Username: <input type="text" name="usernametoinvite">
     <input type="submit" value="Invite user">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% endif %}
 {% for card in cardlist %}
 {% set winrate = (card.wins / (card.wins + card.losses) * 100) if not card.wins + card.losses == 0 else 0 %}
 {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ '%0.2f' % winrate|float }}%

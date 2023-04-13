@@ -89,7 +89,8 @@ def collectionlist(collection_id):
     is_invited = collectioninvites.find_guest_in_collection_id(user_id, collection_id)
     if user_id == owner_id or is_invited:
         return render_template("collectionlist.html",
-            cardlist=cardlist, collection=collection, invited_users=invited_users)
+            cardlist=cardlist, collection=collection, invited_users=invited_users,
+            logged_userid=user_id)
     return render_template("error.html",
         message="not your collection")
 
