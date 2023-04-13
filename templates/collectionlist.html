@@ -2,7 +2,7 @@
 {% block title %}{{ collection.name }}{% endblock %}
 {% block content %}
 
-<h2>Collection: {{ collection.name }}</h2>
+<h2>Collection: {{ collection.name }} by {{ collection.username }}</h2>
 
 <form action="/addcard" method="post">
     Card name: <input type="text" name="cardname">
