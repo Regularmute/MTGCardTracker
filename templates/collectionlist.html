@@ -3,6 +3,10 @@
 {% block content %}
 
 <h2>Collection: {{ collection.name }} by {{ collection.username }}</h2>
+<strong> Invited users: </strong>
+{% for user in invited_users %}
+    {{ user.username }}&nbsp;
+{% endfor %}
 
 <form action="/addcard" method="post">
     Card name: <input type="text" name="cardname">
