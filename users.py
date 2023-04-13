@@ -21,6 +21,13 @@ def find_one_by_username(username):
     sql = text("SELECT username, id FROM users WHERE username=:username")
     return db.session.execute(sql, {"username": username}).fetchone()
 
+def find_invited_users_by_collection_id(collection_id):
+    sql = text("""SELECT users.username, users.id FROM users
+                INNER JOIN collection_invitations
+                ON users.id=collection_invitations.guest_id
+                WHERE collection_invitations.collection_id=:collection_id""")
+    return db.session.execute(sql, {"collection_id": collection_id}).fetchall()
+
 def logout():
     del session["user_id"]
     del session["username"]
