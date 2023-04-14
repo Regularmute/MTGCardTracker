@@ -28,6 +28,7 @@
         'Are you sure you want to delete this card? Its statistics can\'t be recovered');">
     <button name="deletecard">delete card</button>
     <input type="hidden" name="card_id" value="{{ card.id }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <form action="/updatewins" method="post">
     <button name="addwins">add win</button>
