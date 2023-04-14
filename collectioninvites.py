@@ -9,6 +9,18 @@ def invite_user_to_collection(collection_id, guest_id):
     db.session.commit()
     return True
 
+def find_one_by_guest_and_collection(guest_id, collection_id):
+    sql = text("""SELECT id FROM collection_invitations WHERE guest_id=:guest_id
+                AND collection_id=:collection_id""")
+    invitation = db.session.execute(sql,
+                {"guest_id": guest_id,"collection_id": collection_id}).fetchone()
+
+    if not invitation:
+        return False
+
+    return invitation
+
+
 def find_guest_in_collection_id(guest_id, collection_id):
     sql = text("""SELECT guest_id, collection_id FROM collection_invitations
                 WHERE guest_id=:guest_id AND collection_id=:collection_id""")
