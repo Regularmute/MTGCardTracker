@@ -15,6 +15,8 @@ def register():
     if request.method == "GET":
         return render_template("register.html")
     if request.method == "POST":
+        users.check_csrf()
+
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
@@ -61,6 +63,7 @@ def collections():
             collections=cardcollections.get_collections_by_user(user_id),
             authorized_collections=cardcollections.get_collections_that_invited_guest(user_id))
     if request.method == "POST":
+        users.check_csrf()
         title = request.form["title"].strip()
         if len(title) < 1:
             return render_template("error.html",
@@ -73,6 +76,7 @@ def collections():
 
 @app.route("/deletecollection", methods=["post"])
 def deletecollection():
+    users.check_csrf()
     collection_id = request.form["collection_id"]
     cardcollections.delete_collection(collection_id)
     return redirect("/collections")
@@ -96,6 +100,8 @@ def collectionlist(collection_id):
 
 @app.route("/inviteuser", methods=["post"])
 def inviteuser():
+    users.check_csrf()
+
     collection_id = cardcollections.get_collection_id()
     username = request.form["usernametoinvite"]
 
@@ -121,6 +127,8 @@ def inviteuser():
 
 @app.route("/addcard", methods=["post"])
 def addcard():
+    users.check_csrf()
+
     collection_id = cardcollections.get_collection_id()
     cardname = request.form["cardname"]
     if len(cardname) < 1:
@@ -134,6 +142,8 @@ def addcard():
 
 @app.route("/deletecard", methods=["post"])
 def deletecard():
+    users.check_csrf()
+
     collection_id = cardcollections.get_collection_id()
     card_id = request.form["card_id"]
     cards.delete_card(card_id)
