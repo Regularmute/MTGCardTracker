@@ -34,6 +34,7 @@ def find_invited_users_by_collection_id(collection_id):
 def logout():
     del session["user_id"]
     del session["username"]
+    del session["csrf_token"]
 
 def register(username, password):
     hash_value = generate_password_hash(password)
