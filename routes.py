@@ -98,9 +98,26 @@ def collectionlist(collection_id):
 def inviteuser():
     collection_id = cardcollections.get_collection_id()
     username = request.form["usernametoinvite"]
-    invited_user = users.find_one_by_username(username)[1]
-    collectioninvites.invite_user_to_collection(collection_id, invited_user)
+
+    if not username:
+        return render_template("error.html",
+            message="invitation must have a username")
+
+    invited_user_id = users.find_one_by_username(username)
+
+    if not invited_user_id:
+        return render_template("error.html", message="user does not exist")
+
+    invitation_exists = collectioninvites.find_one_by_guest_and_collection(
+                        invited_user_id, collection_id)
+
+    if invitation_exists:
+        return render_template(
+            "error.html", message="user is already invited to this collection")
+
+    collectioninvites.invite_user_to_collection(collection_id, invited_user_id)
     return redirect(f"collections/{collection_id}")
+
 
 @app.route("/addcard", methods=["post"])
 def addcard():
