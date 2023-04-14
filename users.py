@@ -18,8 +18,11 @@ def login(username, password):
     return False
 
 def find_one_by_username(username):
-    sql = text("SELECT username, id FROM users WHERE username=:username")
-    return db.session.execute(sql, {"username": username}).fetchone()
+    sql = text("SELECT id FROM users WHERE username=:username")
+    user = db.session.execute(sql, {"username": username}).fetchone()
+    if not user:
+        return False
+    return user[0]
 
 def find_invited_users_by_collection_id(collection_id):
     sql = text("""SELECT users.username, users.id FROM users
