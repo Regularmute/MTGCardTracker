@@ -26,3 +26,10 @@ def find_guest_in_collection_id(guest_id, collection_id):
                 WHERE guest_id=:guest_id AND collection_id=:collection_id""")
     return db.session.execute(
         sql, {"guest_id": guest_id, "collection_id": collection_id}).fetchall()
+
+def remove_guest_from_collection(guest_id, collection_id):
+    sql = text("""DELETE FROM collection_invitations WHERE guest_id=:guest_id
+                AND collection_id=:collection_id""")
+    db.session.execute(sql, {"guest_id": guest_id, "collection_id": collection_id})
+    db.session.commit()
+    return True

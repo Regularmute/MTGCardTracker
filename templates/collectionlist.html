@@ -3,10 +3,27 @@
 {% block content %}
 
 <h2>Collection: {{ collection.name }} by {{ collection.username }}</h2>
-<strong> Invited users: </strong>
+<strong>Invited users: </strong>
 {% for user in invited_users %}
     {{ user.username }}&nbsp;
 {% endfor %}
+
+<br>
+
+{% if logged_userid == collection.owner_id %}
+    <strong>Uninvite user: </strong>
+    <form action="/uninviteuser" method="post" onsubmit="return confirm(
+        `Are you sure you want to uninvite this user?`);">
+        <select name="uninvited_user">
+            {% for user in invited_users %}
+                <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="confirm">
+        <input type="hidden" name="collection_id" value="{{ collection.id }}">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
+{% endif %}
 
 <form action="/addcard" method="post">
     Card name: <input type="text" name="cardname">

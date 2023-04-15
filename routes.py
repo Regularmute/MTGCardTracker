@@ -122,6 +122,17 @@ def inviteuser():
     collectioninvites.invite_user_to_collection(collection_id, invited_user_id)
     return redirect(f"collections/{collection_id}")
 
+@app.route("/uninviteuser", methods=["post"])
+def uninviteuser():
+    users.check_csrf()
+
+    collection_id = request.form["collection_id"]
+    uninvited_user_id = request.form["uninvited_user"]
+
+    collectioninvites.remove_guest_from_collection(
+        uninvited_user_id, collection_id)
+
+    return redirect(f"/collections/{collection_id}")
 
 @app.route("/addcard", methods=["post"])
 def addcard():
