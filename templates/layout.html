@@ -3,8 +3,13 @@
 <title>CardApp - {% block title %}{% endblock %}</title>
 <nav class="navbar">
     <a href="/">Front Page</a>
-    <a href="/collections">Your Collections</a>
-    <a href="/logout">Logout</a>
+    {% if session.user_id %}
+        <a href="/collections">Your Collections</a>
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
 </nav>
 <div class="outside-container">
     {% block content %}{% endblock %}
