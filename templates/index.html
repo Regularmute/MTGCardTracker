@@ -1,15 +1,14 @@
-<Title>CardApp - Front Page</Title>
+{% extends "layout.html" %}
+{% block title %}CardApp - Front Page{% endblock %}
+{% block content %}
+
+<h1>Card Collection Tracker</h1>
 
 {% if session.user_id %}
-<a href="/">Front Page</a>
-<a href="/collections">Your Collections</a>
-<a href="/logout">Logout</a>
-<h1>Card Collection Tracker</h1>
-
 <p>You have logged in as {{ session.username }}</p>
 {% else %}
-<h1>Card Collection Tracker</h1>
 <p>You are not logged in. Log in <a href="/login">here</a>.</p>
 {% endif %}
 
 <p>Welcome!</p>
+{% endblock %}

@@ -1,4 +1,6 @@
-<Title>Register account</Title>
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
 <h2>Create an account</h2>
 
 <form action="/register" method="post">
@@ -10,3 +12,4 @@ Confirm password: <input type="password" name="password2" minlength="6" maxlengt
 <p>
 <input type="submit" value="Create account">
 </form>
+{% endblock %}
