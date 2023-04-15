@@ -4,14 +4,21 @@
 <h2>Your collections</h2>
 
 {% for collection in collections %}
-<a href="{{ url_for('collectionlist', collection_id=collection.id) }}">{{ collection.name }}</a>
-<form action="/deletecollection" method="post"
-    onsubmit="return confirm('Are you sure you want to delete this collection?');">
-    <button name="deletecollection" >delete collection</button>
-    <input type="hidden" name="collection_id" value="{{ collection.id }}">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
-<hr>
+<div class="collection">
+    <div>
+        <a href="{{ url_for('collectionlist', collection_id=collection.id) }}">
+            {{ collection.name }}
+        </a>
+    </div>
+    <div>
+        <form action="/deletecollection" method="post"
+        onsubmit="return confirm('Are you sure you want to delete this collection?');">
+            <button name="deletecollection" >delete collection</button>
+            <input type="hidden" name="collection_id" value="{{ collection.id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        </form>
+    </div>
+</div>
 {% endfor %}
 
 <form action="/collections" method="post">
