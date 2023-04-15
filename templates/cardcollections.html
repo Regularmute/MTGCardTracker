@@ -29,7 +29,12 @@
 <hr>
 <h2>Collections invited to</h2>
 {% for collection in authorized_collections %}
-<a href="{{ url_for('collectionlist', collection_id=collection.id) }}">{{ collection.name }}</a>
-<hr>
+<div class="collection">
+    <div>
+        <a href="{{ url_for('collectionlist', collection_id=collection.id) }}">
+            {{ collection.name }}
+        </a>
+    </div>
+</div>
 {% endfor %}
 {% endblock %}
