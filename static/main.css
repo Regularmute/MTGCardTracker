@@ -29,3 +29,21 @@ nav a:hover {
 .outside-container {
     margin: 1rem;
 }
+
+.collection {
+    display: flex;
+    margin: 1rem;
+    background-color: #cfe5fe;
+    border: 0.1rem solid black;
+    border-radius: 0.5rem;
+}
+
+.collection div {
+    padding: 0.5rem;
+    padding-left: 1rem;
+}
+
+.collection a {
+    font-family: 'Georgia', 'Arial', serif;
+    text-decoration: none;
+}
