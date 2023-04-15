@@ -1,7 +1,9 @@
 <!doctype html>
+<link rel="stylesheet" href="/static/main.css">
 <title>CardApp - {% block title %}{% endblock %}</title>
-<a href="/">Front Page</a>
-<a href="/collections">Your Collections</a>
-<a href="/logout">Logout</a>
-<hr>
+<nav class="navbar">
+    <a href="/">Front Page</a>
+    <a href="/collections">Your Collections</a>
+    <a href="/logout">Logout</a>
+</nav>
 {% block content %}{% endblock %}
