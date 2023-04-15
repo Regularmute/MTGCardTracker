@@ -1,6 +1,9 @@
+body {
+    margin: 0;
+}
+
 nav {
     box-sizing: border-box;
-    margin: -0.5rem;
     width: 100%;
     padding: 1rem;
     background-color: #cfe5f5;
