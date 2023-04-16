@@ -2,7 +2,8 @@ from sqlalchemy import text
 from db import db
 
 def get_decks_by_collection(collection_id):
-    sql = text("""SELECT id, name FROM decks
+    sql = text("""SELECT decks.id, decks.name, users.username FROM decks
+                INNER JOIN users ON decks.creator_id=users.id
                 WHERE collection_id=:collection_id ORDER BY id DESC""")
     return db.session.execute(sql, {"collection_id": collection_id}).fetchall()
 
