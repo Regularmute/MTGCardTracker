@@ -40,6 +40,7 @@
 {% for card in cardlist %}
 {% set winrate = (card.wins / (card.wins + card.losses) * 100) if not card.wins + card.losses == 0 else 0 %}
 {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ '%0.2f' % winrate|float }}%
+{% if logged_userid == collection.owner_id %}
 <form action="/deletecard" method="post"
     onsubmit="return confirm(
         'Are you sure you want to delete this card? Its statistics can\'t be recovered');">
@@ -47,6 +48,7 @@
     <input type="hidden" name="card_id" value="{{ card.id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% endif %}
 <form action="/updatewins" method="post">
     <button name="addwins">add win</button>
     <input type="hidden" name="card_id" value="{{ card.id }}">
