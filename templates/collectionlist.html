@@ -25,51 +25,78 @@
     </form>
 {% endif %}
 
-<form action="/addcard" method="post">
-    Card name: <input type="text" name="cardname">
-    <input type="submit" value="Add card" minlength="1" maxlength="150">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
-{% if logged_userid == collection.owner_id %}
-<form action="/inviteuser" method="post">
-    Username: <input type="text" name="usernametoinvite">
-    <input type="submit" value="Invite user">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
-{% endif %}
-{% for card in cardlist %}
-{% set winrate = (card.wins / (card.wins + card.losses) * 100) if not card.wins + card.losses == 0 else 0 %}
-<div class="card_block">
-    {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ '%0.2f' % winrate|float }}%
+<strong>Display:</strong>
+<input type="radio" name="view_mode" value="cards" onclick="showCardView();" checked>
+    Cards
+</input>
+<input type="radio" name="view_mode" value="decks" onclick="showDeckView();">
+    Decks
+</input>
+
+<div id="card_view">
+    <form action="/addcard" method="post">
+        Card name: <input type="text" name="cardname">
+        <input type="submit" value="Add card" minlength="1" maxlength="150">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
     {% if logged_userid == collection.owner_id %}
-        <form action="/deletecard" method="post"
-            onsubmit="return confirm(
-                'Are you sure you want to delete this card? Its statistics can\'t be recovered');">
-            <button name="deletecard">delete card</button>
-            <input type="hidden" name="card_id" value="{{ card.id }}">
-            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        </form>
+    <form action="/inviteuser" method="post">
+        Username: <input type="text" name="usernametoinvite">
+        <input type="submit" value="Invite user">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
     {% endif %}
-    <form action="/updatewins" method="post">
-        <button name="addwins">add win</button>
-        <input type="hidden" name="card_id" value="{{ card.id }}">
-        <input type="hidden" name="direction" value="add">
-    </form>
-    <form action="/updatewins" method="post">
-        <button name="removewins">remove win</button>
-        <input type="hidden" name="card_id" value="{{ card.id }}">
-        <input type="hidden" name="direction" value="remove">
-    </form>
-    <form action="/updatelosses" method="post">
-        <button name="addloss">add loss</button>
-        <input type="hidden" name="card_id" value="{{ card.id }}">
-        <input type="hidden" name="direction" value="add">
-    </form>
-    <form action="/updatelosses" method="post">
-        <button name="removeloss">remove loss</button>
-        <input type="hidden" name="card_id" value="{{ card.id }}">
-        <input type="hidden" name="direction" value="remove">
-    </form>
+    {% for card in cardlist %}
+    {% set winrate = (card.wins / (card.wins + card.losses) * 100) if not card.wins + card.losses == 0 else 0 %}
+    <div class="card_block">
+        {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ '%0.2f' % winrate|float }}%
+        {% if logged_userid == collection.owner_id %}
+            <form action="/deletecard" method="post"
+                onsubmit="return confirm(
+                    'Are you sure you want to delete this card? Its statistics can\'t be recovered');">
+                <button name="deletecard">delete card</button>
+                <input type="hidden" name="card_id" value="{{ card.id }}">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+        {% endif %}
+        <form action="/updatewins" method="post">
+            <button name="addwins">add win</button>
+            <input type="hidden" name="card_id" value="{{ card.id }}">
+            <input type="hidden" name="direction" value="add">
+        </form>
+        <form action="/updatewins" method="post">
+            <button name="removewins">remove win</button>
+            <input type="hidden" name="card_id" value="{{ card.id }}">
+            <input type="hidden" name="direction" value="remove">
+        </form>
+        <form action="/updatelosses" method="post">
+            <button name="addloss">add loss</button>
+            <input type="hidden" name="card_id" value="{{ card.id }}">
+            <input type="hidden" name="direction" value="add">
+        </form>
+        <form action="/updatelosses" method="post">
+            <button name="removeloss">remove loss</button>
+            <input type="hidden" name="card_id" value="{{ card.id }}">
+            <input type="hidden" name="direction" value="remove">
+        </form>
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
+
+<div class="hidden" id="deck_view">
+    <div>
+        Oh wow, decks!
+    </div>
+</div>
+
+<script>
+    function showCardView() {
+        document.getElementById("card_view").classList.remove("hidden");
+        document.getElementById("deck_view").classList.add("hidden");
+    }
+    function showDeckView() {
+        document.getElementById("card_view").classList.add("hidden");
+        document.getElementById("deck_view").classList.remove("hidden");
+    }
+</script>
 {% endblock %}
