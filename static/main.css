@@ -52,7 +52,7 @@ nav a:hover {
     text-decoration: none;
 }
 
-.card_block {
+.list_block {
     display: flex;
     margin: 1rem;
     padding: 1rem;
