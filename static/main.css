@@ -26,6 +26,10 @@ nav a:hover {
     color: #cfe5f5;
 }
 
+.hidden {
+    display: none;
+}
+
 .outside-container {
     margin: 1rem;
 }
