@@ -84,8 +84,17 @@
 </div>
 
 <div class="hidden" id="deck_view">
+    <form action="/createdeck" method="post">
+        Deck name: <input type="text" name="deckname">
+        <input type="submit" value="Create deck" minlength="1" maxlength="150">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
     <div>
-        Oh wow, decks!
+        {% for deck in decks %}
+        <div class="list_block">
+            {{ deck.name }}
+        </div>
+        {% endfor %}
     </div>
 </div>
 

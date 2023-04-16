@@ -5,6 +5,7 @@ import users
 import cardcollections
 import collectioninvites
 import cards
+import decks
 
 @app.route("/")
 def index():
@@ -87,12 +88,13 @@ def collectionlist(collection_id):
     cardlist = cards.get_cards(collection_id)
     collection = cardcollections.get_collection_by_id(collection_id)
     invited_users = users.find_invited_users_by_collection_id(collection_id)
+    decks_in_collection = decks.get_decks_by_collection(collection_id)
 
     is_invited = collectioninvites.find_guest_in_collection_id(user_id, collection_id)
     if user_id == owner_id or is_invited:
         return render_template("collectionlist.html",
             cardlist=cardlist, collection=collection, invited_users=invited_users,
-            logged_userid=user_id)
+            decks=decks_in_collection, logged_userid=user_id)
     return render_template("error.html",
         message="not your collection")
 
@@ -178,4 +180,21 @@ def updatelosses():
         cards.increase_losses(card_id)
     if direction == "remove":
         cards.remove_losses(card_id)
+    return redirect(f"/collections/{collection_id}")
+
+@app.route("/createdeck", methods=["post"])
+def createdeck():
+    users.check_csrf()
+
+    collection_id = cardcollections.get_collection_id()
+    creator_id = users.user_id()
+    deck_name = request.form["deckname"]
+
+    if len(deck_name) < 1:
+        return render_template("error.html",
+            message="deck name missing")
+    if len(deck_name) > 150:
+        return render_template("error.html",
+                message="deck name too long: max 150 characters")
+    decks.create_deck(deck_name, collection_id, creator_id)
     return redirect(f"/collections/{collection_id}")
