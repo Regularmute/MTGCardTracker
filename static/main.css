@@ -47,3 +47,12 @@ nav a:hover {
     font-family: 'Georgia', 'Arial', serif;
     text-decoration: none;
 }
+
+.card_block {
+    display: flex;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #cfe5f5;
+    border: 0.1rem solid black;
+    border-radius: 0.5rem;
+}
