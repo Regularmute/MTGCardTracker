@@ -93,6 +93,15 @@
         {% for deck in decks %}
         <div class="list_block">
             {{ deck.name }} by {{ deck.username }}
+            {% if logged_userid == deck.creator_id or logged_userid == collection.owner_id %}
+                <form action="/deletedeck" method="post"
+                    onsubmit="return confirm(
+                        'Are you sure you want to delete deck: {{ deck.name }}? Its statistics can\'t be recovered');">
+                    <button name="deletedeck">Delete deck</button>
+                    <input type="hidden" name="deck_id" value="{{ deck.id }}">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                </form>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

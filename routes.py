@@ -198,3 +198,12 @@ def createdeck():
                 message="deck name too long: max 150 characters")
     decks.create_deck(deck_name, collection_id, creator_id)
     return redirect(f"/collections/{collection_id}")
+
+@app.route("/deletedeck", methods=["post"])
+def deletedeck():
+    users.check_csrf()
+
+    collection_id = cardcollections.get_collection_id()
+    deck_id = request.form["deck_id"]
+    decks.delete_deck(deck_id)
+    return redirect(f"/collections/{collection_id}")
