@@ -18,7 +18,7 @@ CREATE TABLE collection_invitations (
 
 CREATE TABLE decks (
     id SERIAL PRIMARY KEY,
-    collection_id INTEGER REFERENCES collections,
+    collection_id INTEGER REFERENCES collections ON DELETE CASCADE,
     creator_id INTEGER REFERENCES users,
     name TEXT NOT NULL
 );
@@ -30,3 +30,9 @@ CREATE TABLE cards (
     wins INTEGER,
     losses INTEGER
 );
+
+CREATE TABLE cards_in_decks (
+    id SERIAL PRIMARY KEY,
+    card_id INTEGER REFERENCES cards ON DELETE CASCADE,
+    deck_id INTEGER REFERENCES decks ON DELETE CASCADE
+)
