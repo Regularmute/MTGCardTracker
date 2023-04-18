@@ -6,6 +6,7 @@ import cardcollections
 import collectioninvites
 import cards
 import decks
+import cards_in_decks
 
 @app.route("/")
 def index():
@@ -207,3 +208,15 @@ def deletedeck():
     deck_id = request.form["deck_id"]
     decks.delete_deck(deck_id)
     return redirect(f"/collections/{collection_id}")
+
+@app.route("/decks/<int:deck_id>")
+def decklist(deck_id):
+    user_id = users.user_id()
+    decklist = cards_in_decks.get_cards_by_deck_id(deck_id)
+    deck = decks.get_one_by_id(deck_id)
+    collection = cardcollections.get_collection_by_id
+
+    return render_template("decklist.html",
+        decklist=decklist, deck=deck,
+        logged_userid=user_id, collection=collection
+    )
