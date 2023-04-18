@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}{{ deck.name }}{% endblock %}
+{% block content %}
+
+<h2>Deck: {{ deck.name }} by {{ deck.username }}</h2>
+
+{% for card in decklist %}
+{% set winrate = (card.wins / (card.wins + card.losses) * 100) if not card.wins + card.losses == 0 else 0 %}
+<div class="list_block">
+    {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ '%0.2f' % winrate|float }}%
+    {% if logged_userid == collection.owner_id or logged_userid == deck.creator_id%}
+        <form action="/removecardslot" method="post"
+            onsubmit="return confirm(
+                'Are you sure you want to remove {{ card.name }} from deck {{ deck.name }}?');">
+            <button name="removecard">remove card</button>
+            <input type="hidden" name="cardslot_id" value="{{ cardslot.id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        </form>
+    {% endif %}
+    <form action="/updatewins" method="post">
+        <button name="addwins">add win</button>
+        <input type="hidden" name="card_id" value="{{ card.id }}">
+        <input type="hidden" name="direction" value="add">
+    </form>
+    <form action="/updatewins" method="post">
+        <button name="removewins">remove win</button>
+        <input type="hidden" name="card_id" value="{{ card.id }}">
+        <input type="hidden" name="direction" value="remove">
+    </form>
+    <form action="/updatelosses" method="post">
+        <button name="addloss">add loss</button>
+        <input type="hidden" name="card_id" value="{{ card.id }}">
+        <input type="hidden" name="direction" value="add">
+    </form>
+    <form action="/updatelosses" method="post">
+        <button name="removeloss">remove loss</button>
+        <input type="hidden" name="card_id" value="{{ card.id }}">
+        <input type="hidden" name="direction" value="remove">
+    </form>
+</div>
+{% endfor %}
+
+{% endblock %}
