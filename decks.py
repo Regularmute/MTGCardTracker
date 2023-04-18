@@ -7,6 +7,12 @@ def get_decks_by_collection(collection_id):
                 WHERE collection_id=:collection_id ORDER BY id DESC""")
     return db.session.execute(sql, {"collection_id": collection_id}).fetchall()
 
+def get_one_by_id(deck_id):
+    sql = text("""SELECT decks.id, decks.name, decks.creator_id, users.username
+                FROM decks INNER JOIN users ON decks.creator_id=users.id
+                WHERE decks.id=:deck_id""")
+    return db.session.execute(sql, {"deck_id": deck_id}).fetchone()
+
 def create_deck(name, collection_id, creator_id):
     sql = text("""INSERT INTO decks (name, collection_id, creator_id)
                 VALUES (:name,:collection_id,:creator_id)""")
