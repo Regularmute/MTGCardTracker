@@ -92,7 +92,9 @@
     <div>
         {% for deck in decks %}
         <div class="list_block">
-            {{ deck.name }} by {{ deck.username }}
+            <a href="{{ url_for('decklist', deck_id=deck.id) }}">
+                {{ deck.name }}
+            </a> by {{ deck.username }}
             {% if logged_userid == deck.creator_id or logged_userid == collection.owner_id %}
                 <form action="/deletedeck" method="post"
                     onsubmit="return confirm(
