@@ -19,9 +19,8 @@
 {% endif %}
 
 {% for card in decklist %}
-{% set winrate = (card.wins / (card.wins + card.losses) * 100) if not card.wins + card.losses == 0 else 0 %}
 <div class="list_block">
-    {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ '%0.2f' % winrate|float }}%
+    {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ card.win_rate }}%
     {% if logged_userid == collection.owner_id or logged_userid == deck.creator_id %}
         <form action="/removecardfromdeck" method="post"
             onsubmit="return confirm(
