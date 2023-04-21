@@ -215,14 +215,14 @@ def deletedeck():
 @app.route("/decks/<int:deck_id>")
 def decklist(deck_id):
     user_id = users.user_id()
-    decklist = cards_in_decks.get_cards_by_deck_id(deck_id)
+    cards_in_deck = cards_in_decks.get_cards_by_deck_id(deck_id)
     deck = decks.get_one_by_id(deck_id)
     collection_id = cardcollections.get_collection_id()
     collection = cardcollections.get_collection_by_id(collection_id)
-    collectionlist = cards.get_cards(collection_id)
+    cards_in_collection = cards.get_cards(collection_id)
 
     return render_template("decklist.html",
-        decklist=decklist, collectionlist=collectionlist, deck=deck,
+        decklist=cards_in_deck, collectionlist=cards_in_collection, deck=deck,
         logged_userid=user_id, collection=collection
     )
 
