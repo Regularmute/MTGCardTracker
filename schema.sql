@@ -36,4 +36,4 @@ CREATE TABLE cards_in_decks (
     id SERIAL PRIMARY KEY,
     card_id INTEGER REFERENCES cards ON DELETE CASCADE,
     deck_id INTEGER REFERENCES decks ON DELETE CASCADE
-)
+);
