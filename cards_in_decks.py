@@ -20,8 +20,8 @@ def find_one_by_deck_and_card(deck_id, card_id):
     return card_in_deck
 
 def get_cards_by_deck_id(deck_id):
-    sql = text("""SELECT cards.id, cards_in_decks.id, name, wins, losses FROM cards_in_decks
-                INNER JOIN cards ON cards_in_decks.card_id=cards.id
+    sql = text("""SELECT cards_in_decks.id AS slot_id, cards.id, cards_in_decks.id, name, wins, losses
+                FROM cards_in_decks INNER JOIN cards ON cards_in_decks.card_id=cards.id
                 WHERE cards_in_decks.deck_id=:deck_id ORDER BY cards_in_decks.id DESC""")
 
     decklist = db.session.execute(sql, {"deck_id": deck_id}).fetchall()
