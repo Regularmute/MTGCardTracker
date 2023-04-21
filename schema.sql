@@ -28,7 +28,8 @@ CREATE TABLE cards (
     collection_id INTEGER REFERENCES collections ON DELETE CASCADE,
     name TEXT NOT NULL,
     wins INTEGER,
-    losses INTEGER
+    losses INTEGER,
+    win_rate NUMERIC (5,2)
 );
 
 CREATE TABLE cards_in_decks (
