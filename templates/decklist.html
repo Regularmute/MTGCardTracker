@@ -4,6 +4,18 @@
 
 <h2>Deck: {{ deck.name }} by {{ deck.username }}</h2>
 
+<form action="/addcardtodeck" method="post">
+    Add card from {{ collection.name }}:
+    <select name="card_to_add">
+        {% for card in collectionlist %}
+            <option value="{{ card.id }}">{{ card.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Add card" minlength="1" maxlength="150">
+    <input type="hidden" name="deck_id" value="{{ deck.id }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
 {% for card in decklist %}
 {% set winrate = (card.wins / (card.wins + card.losses) * 100) if not card.wins + card.losses == 0 else 0 %}
 <div class="list_block">
@@ -13,7 +25,8 @@
             onsubmit="return confirm(
                 'Are you sure you want to remove {{ card.name }} from deck {{ deck.name }}?');">
             <button name="removecard">remove card</button>
-            <input type="hidden" name="cardslot_id" value="{{ cardslot.id }}">
+            <input type="hidden" name="card_id" value="{{ card.id }}">
+            <input type="hidden" name="deck_id" value="{{ deck.id }}">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     {% endif %}
