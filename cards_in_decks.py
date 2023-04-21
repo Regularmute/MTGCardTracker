@@ -34,3 +34,9 @@ def remove_card_from_deck(card_id, deck_id):
     db.session.execute(sql, {"deck_id": deck_id, "card_id": card_id})
     db.session.commit()
     return True
+
+def remove_cardslot(cardslot_id):
+    sql = text("DELETE FROM cards_in_decks WHERE id=:cardslot_id")
+    db.session.execute(sql, {"cardslot_id": cardslot_id})
+    db.session.commit()
+    return True

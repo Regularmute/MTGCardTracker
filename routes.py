@@ -239,3 +239,17 @@ def addcardtodeck():
 
     cards_in_decks.add_card_to_deck(card_id, deck_id)
     return redirect(f"decks/{deck_id}")
+
+@app.route("/removecardfromdeck", methods=["post"])
+def removecardfromdeck():
+    users.check_csrf()
+
+    deck_id = request.form["deck_id"]
+    cardslot_id = request.form["cardslot_id"]
+
+    if not cardslot_id:
+        return render_template("error.html",
+            message="card doesn't exist in deck")
+
+    cards_in_decks.remove_cardslot(cardslot_id)
+    return redirect(f"decks/{deck_id}")
