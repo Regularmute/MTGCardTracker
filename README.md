@@ -9,17 +9,27 @@ The application currently has the following features:
 
   * The user can log in, log out and create an account.
   * The user can create a new empty collection of cards.
+  * The owner of a collection can invite other users to the collection.
+    * The owner can uninvite users from their collection
   * The user can delete their collections.
   * The user can add cards to their collection.
     * Each card has a name, amount of wins, losses and a win rate percentage.
     * Wins and losses can be incremented and decremented.
   * The user can delete cards from their collection.
+  * The owner or an invited user can add decks to their collection.
+  * The creator of a deck or the owner of the collection can add and remove cards to the deck.
+  * Decks can be deleted.
   * A user can browse their collections and cards within the collections.
 
 <h2>Test ideas</h2>
-Some bugs may occur when testing, they are usually solved either by refreshing the page or by returning to an earlier page and trying the operation again. These will be fixed in the future.
-
 Some ways to test the current features:
+
+<h3>Navigation</h3>
+
+<strong>New: </strong>
+
+  * The navigation bar and its links work correctly.
+  * The navigation bar's links depend on whether or not the user is logged in.
 
 <h3>Registration</h3>
 
@@ -38,6 +48,29 @@ Some ways to test the current features:
 
   * Error page should have a link to the front page and display an explanation of what caused the error.
 
+  <strong>New:</strong>
+
+  * No unrecognized errors (i.e. Internal Server Error 500) are thrown
+  * Errors are thrown for:
+    * Registering with an existing username
+    * Registering with an invalid username
+      * Username can only contain letters a-z and numbers 0-9
+      * Username can have between 1 and 60 characters
+    * Passwords don't match when registering
+    * Logging in with incorrect credentials
+    * Adding a collection without a name or a name with over 60 characters
+    * Viewing a collection as an uninvited user directly through the url
+    * Inviting a user without entering a name
+    * Inviting a nonexistent user
+    * Inviting an already invited user
+    * Uninviting an empty choice
+    * Adding a card without a name
+    * Adding a card with a name longer than 150 characters
+    * Adding a deck without a name
+    * Adding a deck with a name longer than 150 characters
+    * Adding a nonexistent card to a nonexistent deck
+    * Removing a nonexistent card from the deck
+
 <h3>Collections</h3>
 
   * The collection page should be accessible from the front page if and only if the user is logged in.
@@ -46,6 +79,21 @@ Some ways to test the current features:
   * The collection page should display all of the user's collections.
     * The collections should display a button to delete them, and deletion should remove the collection and the cards inside without affecting the other collections or their contents.
   * The user can click a collection's name to access their unique page
+
+  <strong>New:</strong>
+
+  * Deleting a collection asks for confirmation before performing the operation.
+  * Users can be invited and uninvited only by the collection's owner
+  * Invited users' rights work correctly - they can:
+    * View collections they've been invited to
+    * Create decks in that collection
+    * Add, remove and update the winrate of cards to their decks from the collection
+    * See other users' decks
+    * Cannot manipulate other users' decks
+  * Inviting users works correctly (the username field is case sensitive!)
+  * Uninviting users works correctly
+  * Uninviting users requires confirmation
+  * The user can alternate between viewing cards and viewing decks
 
 <h3>Cards</h3>
 
@@ -62,14 +110,25 @@ Some ways to test the current features:
     * remove win: should decrement the card's wins and update its win rate.
     * remove loss: should decrement the card's losses and update its win rate.
 
+<strong>New:</strong>
+
+  * Deleting a card asks for confirmation before performing the operation.
+
+<h3>Decks</h3>
+
+  * Empty decks can be created
+  * Cards from the collection can be added to a deck
+    * Multiple copies of a card can be added to a deck
+  * Win and loss adjustments made to cards in a deck carry over to the collection
+  * Individual cards can be deleted without affecting duplicate copies of it in the deck.
+  * Deleting a deck asks for confirmation before performing the operation.
+
 
 <h2>Planned features</h2>
 Possible ideas to expand the application:
 
-  * The creator of a collection can add other users as "players" to view the collection.
-  * The user can view any collections they've been invited to as players.
+  * Inviting the user requires a confirmation by the client to avoid misclicks
   * The user can search for a card in a collection or deck by name or other property.
-  * The user can create a deck from the cards in a collection they have access to
   * The user can sort cards by name, wins, losses, winrate and time added.
   * The user can add multiple cards at once.
   * The user can update multiple cards' wins or losses at once.
