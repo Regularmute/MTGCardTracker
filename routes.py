@@ -214,9 +214,28 @@ def decklist(deck_id):
     user_id = users.user_id()
     decklist = cards_in_decks.get_cards_by_deck_id(deck_id)
     deck = decks.get_one_by_id(deck_id)
-    collection = cardcollections.get_collection_by_id
+    collection_id = cardcollections.get_collection_id()
+    collection = cardcollections.get_collection_by_id(collection_id)
+    collectionlist = cards.get_cards(collection_id)
 
     return render_template("decklist.html",
-        decklist=decklist, deck=deck,
+        decklist=decklist, collectionlist=collectionlist, deck=deck,
         logged_userid=user_id, collection=collection
     )
+
+@app.route("/addcardtodeck", methods=["post"])
+def addcardtodeck():
+    users.check_csrf()
+
+    card_id = request.form["card_to_add"]
+    deck_id = request.form["deck_id"]
+
+    if not card_id:
+        return render_template("error.html",
+            message="card doesn't exist")
+    if not deck_id:
+        return render_template("error.html",
+            message="deck doesn't exist")
+
+    cards_in_decks.add_card_to_deck(card_id, deck_id)
+    return redirect(f"decks/{deck_id}")
