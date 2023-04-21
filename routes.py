@@ -135,6 +135,9 @@ def uninviteuser():
     collectioninvites.remove_guest_from_collection(
         uninvited_user_id, collection_id)
 
+    if not uninvited_user_id:
+        return render_template("error.html", message="no user selected")
+
     return redirect(f"/collections/{collection_id}")
 
 @app.route("/addcard", methods=["post"])
