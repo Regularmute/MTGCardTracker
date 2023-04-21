@@ -6,20 +6,20 @@ The application has following features:
 
 Features for any user:
 * A user can log in, log out and create an account. (Done)
-* A user can browse collections, including decks and cards within the collections.
+* A user can browse collections, including decks and cards within the collections. (Done)
   * The user can search, filter and sort the displays by Name, Color or Win rate.
 * A user can create a new empty collection of cards. (Done)
 
 Features for the creator of a collection, referred to as its 'owner':
   * The owner can add cards to the collection. Each card is assigned a name, a color (including 'colorless'), victories and losses. (NOTE: Worth considering if more properties should be included from the start, in case adding new fields to the database may turn out difficult later.) (Partially Done)
-  * The owner can adjust the properties of cards in their collection.
+  * The owner can adjust the properties of cards in their collection. (Partiall)
   * The owner can remove cards from their collection. (Done)
   * The owner can delete the collection. (Done)
-  * The owner can invite other users to use the collection.
+  * The owner can invite other users to use the collection. (Done)
 
 Features for users invited to use a collection (Including the owner):
-* An invited user can create a deck from the cards in the collection.
-* An invited user can update the amount of times cards in their deck have won or lost.
+* An invited user can create a deck from the cards in the collection. (Done)
+* An invited user can update the amount of times cards in their deck have won or lost.(Done)
   * Possible implementation is to let the user select multiple cards in their deck with checkboxes and simultaenously increment their Victories or Losses by one. This will prevent cards that weren't drawn in a game from having their win rate affected.
 
 I am planning to keep track of following databases with various values:
