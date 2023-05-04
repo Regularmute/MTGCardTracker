@@ -1,5 +1,6 @@
 <!doctype html>
 <link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CardApp - {% block title %}{% endblock %}</title>
 <nav class="navbar">
     <a href="/">Front Page</a>
@@ -12,5 +13,8 @@
     {% endif %}
 </nav>
 <div class="outside-container">
+    <h1>Card Collection Tracker</h1>
+</div>
+<div class="column-container">
     {% block content %}{% endblock %}
 </div>
