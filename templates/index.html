@@ -2,13 +2,20 @@
 {% block title %}CardApp - Front Page{% endblock %}
 {% block content %}
 
-<h1>Card Collection Tracker</h1>
+<div class="textblock-blue">
+    <p>Here you can organize your trading cards into collections, and make
+        decks out of them. You can invite other users by their usernames to
+        make decks as well. Any user with access to a collection can update
+        how well a card is doing, so the owner can see if there are any
+        overly strong or weak-performing cards to address. Only the owner
+        of a collection can add or remove cards.</p>
+</div>
 
-{% if session.user_id %}
-<p>You have logged in as {{ session.username }}</p>
-{% else %}
-<p>You are not logged in. Log in <a href="/login">here</a>.</p>
-{% endif %}
-
-<p>Welcome!</p>
+<div>
+    {% if session.user_id %}
+    <p>You have logged in as <b>{{ session.username }}</b></p>
+    {% else %}
+    <p>You are not logged in. Log in <a href="/login">here</a>.</p>
+    {% endif %}
+</div>
 {% endblock %}
