@@ -32,6 +32,35 @@ nav a:hover {
 
 .outside-container {
     margin: 1rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.column-container {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.textblock-blue {
+    display: flex;
+    margin: 1rem;
+    background-color: #cfe5fe;
+    border: 0.1rem solid black;
+    border-radius: 0.5rem;
+}
+
+.textblock-blue * {
+    padding: 1rem;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #cfe5fe;
+    border: 0.1rem solid black;
 }
 
 .collection {
@@ -54,9 +83,20 @@ nav a:hover {
 
 .list_block {
     display: flex;
-    margin: 1rem;
+    margin: auto;
+    margin-bottom: 0.5rem;
+    flex-direction: column;
     padding: 1rem;
     background-color: #cfe5f5;
     border: 0.1rem solid black;
     border-radius: 0.5rem;
+}
+
+.block-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.block-row p {
+    margin: 0.5rem;
 }
