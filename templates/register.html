@@ -2,6 +2,10 @@
 {% block title %}Register{% endblock %}
 {% block content %}
 <h2>Create an account</h2>
+<div>
+    <p>The username must be between 6 and 60, and can only contain English
+    letters and numbers. Password must be at least 6 characters long.</p>
+</div>
 
 <form action="/register" method="post">
 Username: <input type="text" name="username" minlength="1" maxlength="60">
