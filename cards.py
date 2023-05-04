@@ -25,32 +25,32 @@ def delete_card(card_id):
 
 def increase_wins(card_id):
     sql = text("""UPDATE cards SET wins=wins+1, win_rate=
-                CASE WHEN (wins+losses+1) = 0 THEN 0 ELSE (wins+1)*100.0/(wins+losses+1) END
-                WHERE id=:card_id""")
+                CASE WHEN (wins+losses+1)=0 THEN 0
+                ELSE (wins+1)*100.0/(wins+losses+1) END WHERE id=:card_id""")
     db.session.execute(sql, {"card_id": card_id})
     db.session.commit()
     return True
 
 def remove_wins(card_id):
-    sql = text("""UPDATE cards SET wins=wins-1, win_rate=
-                CASE WHEN (wins+losses-1) = 0 THEN 0 ELSE (wins-1)*100.0/(wins+losses-1) END
-                WHERE id=:card_id""")
+    sql = text("""UPDATE cards SET wins=CASE WHEN (wins-1) < 0 THEN 0
+                ELSE wins-1 END, win_rate=CASE WHEN (wins+losses-1) = 0 THEN 0
+                ELSE (wins-1)*100.0/(wins+losses-1) END WHERE id=:card_id""")
     db.session.execute(sql, {"card_id": card_id})
     db.session.commit()
     return True
 
 def increase_losses(card_id):
     sql = text("""UPDATE cards SET losses=losses+1, win_rate=
-                CASE WHEN (wins+losses+1) = 0 THEN 0 ELSE (wins)*100.0/(wins+losses+1) END
-                WHERE id=:card_id""")
+                CASE WHEN (wins+losses+1)=0 THEN 0
+                ELSE (wins)*100.0/(wins+losses+1) END WHERE id=:card_id""")
     db.session.execute(sql, {"card_id": card_id})
     db.session.commit()
     return True
 
 def remove_losses(card_id):
-    sql = text("""UPDATE cards SET losses=losses-1, win_rate=
-                CASE WHEN (wins+losses-1) = 0 THEN 0 ELSE (wins)*100.0/(wins+losses-1) END
-                WHERE id=:card_id""")
+    sql = text("""UPDATE cards SET losses=CASE WHEN (losses-1) < 0 THEN 0
+                ELSE losses-1 END, win_rate=CASE WHEN (wins+losses-1) = 0 THEN 0
+                ELSE (wins)*100.0/(wins+losses-1) END WHERE id=:card_id""")
     db.session.execute(sql, {"card_id": card_id})
     db.session.commit()
     return True
