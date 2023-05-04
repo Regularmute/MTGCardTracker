@@ -20,8 +20,14 @@
 
 {% for card in decklist %}
 <div class="list_block">
-    {{ card.name }} wins: {{ card.wins }} losses: {{ card.losses }} win-ratio: {{ card.win_rate }}%
+    <div class="block-row">
+        <div><strong>{{ card.name }}</strong></div>
+        <div><p>wins: {{ card.wins }}</p></div>
+        <div><p>losses: {{ card.losses }}</p></div>
+        <div><p>win-ratio: {{ card.win_rate }}%</p></div>
+    </div>
     {% if logged_userid == collection.owner_id or logged_userid == deck.creator_id %}
+    <div class="block-row">
         <form action="/removecardfromdeck" method="post"
             onsubmit="return confirm(
                 'Are you sure you want to remove {{ card.name }} from deck {{ deck.name }}?');">
@@ -30,34 +36,35 @@
             <input type="hidden" name="cardslot_id" value="{{ card.slot_id }}">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
-    <form action="/updatewins" method="post">
-        <button name="addwins">add win</button>
-        <input type="hidden" name="card_id" value="{{ card.id }}">
-        <input type="hidden" name="direction" value="add">
-        <input type="hidden" name="url"
-                value="{{ url_for('decklist', deck_id=deck.id) }}">
-    </form>
-    <form action="/updatewins" method="post">
-        <button name="removewins">remove win</button>
-        <input type="hidden" name="card_id" value="{{ card.id }}">
-        <input type="hidden" name="direction" value="remove">
-        <input type="hidden" name="url"
-                value="{{ url_for('decklist', deck_id=deck.id) }}">
-    </form>
-    <form action="/updatelosses" method="post">
-        <button name="addloss">add loss</button>
-        <input type="hidden" name="card_id" value="{{ card.id }}">
-        <input type="hidden" name="direction" value="add">
-        <input type="hidden" name="url"
-                value="{{ url_for('decklist', deck_id=deck.id) }}">
-    </form>
-    <form action="/updatelosses" method="post">
-        <button name="removeloss">remove loss</button>
-        <input type="hidden" name="card_id" value="{{ card.id }}">
-        <input type="hidden" name="direction" value="remove">
-        <input type="hidden" name="url"
-                value="{{ url_for('decklist', deck_id=deck.id) }}">
-    </form>
+        <form action="/updatewins" method="post">
+            <button name="addwins">add win</button>
+            <input type="hidden" name="card_id" value="{{ card.id }}">
+            <input type="hidden" name="direction" value="add">
+            <input type="hidden" name="url"
+                    value="{{ url_for('decklist', deck_id=deck.id) }}">
+        </form>
+        <form action="/updatewins" method="post">
+            <button name="removewins">remove win</button>
+            <input type="hidden" name="card_id" value="{{ card.id }}">
+            <input type="hidden" name="direction" value="remove">
+            <input type="hidden" name="url"
+                    value="{{ url_for('decklist', deck_id=deck.id) }}">
+        </form>
+        <form action="/updatelosses" method="post">
+            <button name="addloss">add loss</button>
+            <input type="hidden" name="card_id" value="{{ card.id }}">
+            <input type="hidden" name="direction" value="add">
+            <input type="hidden" name="url"
+                    value="{{ url_for('decklist', deck_id=deck.id) }}">
+        </form>
+        <form action="/updatelosses" method="post">
+            <button name="removeloss">remove loss</button>
+            <input type="hidden" name="card_id" value="{{ card.id }}">
+            <input type="hidden" name="direction" value="remove">
+            <input type="hidden" name="url"
+                    value="{{ url_for('decklist', deck_id=deck.id) }}">
+        </form>
+    </div>
     {% endif %}
 </div>
 {% endfor %}
