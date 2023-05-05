@@ -1,5 +1,6 @@
 import secrets
 from sqlalchemy.sql import text
+from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import abort, request, session
 from db import db
@@ -42,7 +43,8 @@ def register(username, password):
         sql = text("INSERT INTO users (username,password) VALUES (:username,:password)")
         db.session.execute(sql, {"username":username, "password":hash_value})
         db.session.commit()
-    except:
+    except IntegrityError:
+        print("Username is already in use")
         return False
     return True
 
