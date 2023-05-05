@@ -36,6 +36,8 @@ def register():
         elif users.register(username, password1):
             return redirect("/login")
         return render_template("error.html", message=error_message)
+    # error catching if request beside POST or GET is sent
+    return render_template("error.html", message=error_message)
 
 @app.route("/login", methods=["get", "post"])
 def login():
@@ -47,8 +49,9 @@ def login():
 
         if not users.login(username, password):
             return render_template("error.html",
-                message="wrong username or password")
+                message="Incorrect username or password")
         return redirect("/")
+    return render_template("error.html", message="Something went wrong")
 
 @app.route("/logout")
 def logout():
@@ -73,6 +76,7 @@ def collections():
                 message="collection title too long: max 60 characters")
         cardcollections.create_collection(title)
         return redirect("/collections")
+    return render_template("error.html", message="Something went wrong")
 
 @app.route("/deletecollection", methods=["post"])
 def deletecollection():
