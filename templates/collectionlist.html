@@ -17,24 +17,34 @@
 <br>
 
 {% if logged_userid == collection.owner_id %}
-    <strong>Uninvite user:</strong>
-    <form action="/uninviteuser" method="post" onsubmit="return confirm(
-        `Are you sure you want to uninvite this user?`);">
-        <select name="uninvited_user">
-            {% for user in invited_users %}
-                <option value="{{ user.id }}">{{ user.username }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="confirm">
-        <input type="hidden" name="collection_id" value="{{ collection.id }}">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
-    <strong>Invite User:</strong>
-    <form action="/inviteuser" method="post">
-        <input type="text" name="usernametoinvite" minlength="1" maxlength="60">
-        <input type="submit" value="Invite user">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
+    <div class="toolbar">
+        <div>
+            <strong>Uninvite user:</strong>
+        </div>
+        <div>
+            <form action="/uninviteuser" method="post" onsubmit="return confirm(
+                `Are you sure you want to uninvite this user?`);">
+                <select name="uninvited_user">
+                    {% for user in invited_users %}
+                        <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="confirm">
+                <input type="hidden" name="collection_id" value="{{ collection.id }}">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+        </div>
+        <div>
+            <strong>Invite User:</strong>
+        </div>
+        <div>
+            <form action="/inviteuser" method="post">
+                <input type="text" name="usernametoinvite" minlength="1" maxlength="60">
+                <input type="submit" value="Invite user">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+        </div>
+    </div>
 {% endif %}
 
 <div class="toolbar">
