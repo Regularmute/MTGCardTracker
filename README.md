@@ -10,7 +10,7 @@ The application currently has the following features:
   * The user can log in, log out and create an account.
   * The user can create a new empty collection of cards.
   * The owner of a collection can invite other users to the collection.
-    * The owner can uninvite users from their collection
+    * The owner can uninvite users from their collection.
   * The user can delete their collections.
   * The user can add cards to their collection.
     * Each card has a name, amount of wins, losses and a win rate percentage.
@@ -25,8 +25,6 @@ The application currently has the following features:
 Some ways to test the current features:
 
 <h3>Navigation</h3>
-
-<strong>New: </strong>
 
   * The navigation bar and its links work correctly.
   * The navigation bar's links depend on whether or not the user is logged in.
@@ -47,8 +45,6 @@ Some ways to test the current features:
 <h3>Errors</h3>
 
   * Error page should have a link to the front page and display an explanation of what caused the error.
-
-  <strong>New:</strong>
 
   * No unrecognized errors (i.e. Internal Server Error 500) are thrown
   * Errors are thrown for:
@@ -78,10 +74,7 @@ Some ways to test the current features:
     * The collection must have a name
   * The collection page should display all of the user's collections.
     * The collections should display a button to delete them, and deletion should remove the collection and the cards inside without affecting the other collections or their contents.
-  * The user can click a collection's name to access their unique page
-
-  <strong>New:</strong>
-
+  * The user can click a collection's name to access their unique page.
   * Deleting a collection asks for confirmation before performing the operation.
   * Users can be invited and uninvited only by the collection's owner
   * Invited users' rights work correctly - they can:
@@ -109,9 +102,6 @@ Some ways to test the current features:
     * add loss: should increment the card's losses and update its win rate.
     * remove win: should decrement the card's wins and update its win rate.
     * remove loss: should decrement the card's losses and update its win rate.
-
-<strong>New:</strong>
-
   * Deleting a card asks for confirmation before performing the operation.
 
 <h3>Decks</h3>
@@ -127,7 +117,7 @@ Some ways to test the current features:
 <h2>Planned features</h2>
 Possible ideas to expand the application:
 
-  * Inviting the user requires a confirmation by the client to avoid misclicks
+  * Inviting the user requires a confirmation by the client to avoid misclicks.
   * The user can search for a card in a collection or deck by name or other property.
   * The user can sort cards by name, wins, losses, winrate and time added.
   * The user can add multiple cards at once.
