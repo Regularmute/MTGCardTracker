@@ -3,6 +3,9 @@
 {% block content %}
 
 <h2>Deck: {{ deck.name }} by {{ deck.username }}</h2>
+<a href="{{ url_for('collections', collection_id=collection.id) }}">
+    Back to collection - {{ collection.name }}
+</a>
 
 {% if logged_userid == collection.owner_id or logged_userid == deck.creator_id %}
     <form action="/addcardtodeck" method="post">
