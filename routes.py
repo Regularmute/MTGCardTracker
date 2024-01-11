@@ -20,25 +20,25 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
-        error_message = None
+        error_messages = []
         if users.find_one_by_username(username):
-            error_message="username is taken"
-        elif not re.match(r"^[A-Za-z0-9]+$", username):
-            error_message="username must only have English letters or numbers"
-        elif len(username) < 1:
-            error_message="username must not be empty"
-        elif len(username) > 60:
-            error_message="username is too long: max 60 characters"
-        elif len(password1) < 6:
-            error_message="password must have at least 6 characters"
-        elif password1 != password2:
-            error_message="passwords don't match"
-        if error_message:
-            return render_template("error.html", message=error_message)
+            error_messages.append("username is taken")
+        if not re.match(r"^[A-Za-z0-9]+$", username):
+            error_messages.append("username must only have English letters or numbers")
+        if len(username) < 1:
+            error_messages.append("username must not be empty")
+        if len(username) > 60:
+            error_messages.append("username is too long: max 60 characters")
+        if len(password1) < 6:
+            error_messages.append("password must have at least 6 characters")
+        if password1 != password2:
+            error_messages.append("passwords don't match")
+        if error_messages:
+            return render_template("error.html", messages=error_messages)
         users.register(username, password1)
         return redirect("/login")
     # error catching if request beside POST or GET is sent
-    return render_template("error.html", message=error_message)
+    return render_template("error.html", messages=["Only POST and GET requests are allowed"])
 
 @app.route("/login", methods=["get", "post"])
 def login():
