@@ -1,6 +1,6 @@
 # MTG Card Tracker
 
-<h2>The application is currently not online due to changes in fly.io billing.</h2>
+<h2>Visit the app here: (https://card-tracker-morning-butterfly-2890.fly.dev) </h2>
 
 The application helps manage trading cards and organize them into collections (e.g. "cubes") and decks. Users can update the amount of times a card has won or lost to help the owner of the cube to see how the cards are performing.
 
